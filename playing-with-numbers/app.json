@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "playing-with-numbers",
+    "slug": "playing-with-numbers",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
