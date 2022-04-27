@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, TextInput, View, Pressable } from 'react-native';
+import Button from '../Components/button';
+
 
 export default function Login({ navigation }) {
   const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
 
   const handleClick = () => {
-    navigation.navigate('/game');
+    navigation.navigate('Game');
   };
 
   return (
@@ -15,19 +17,18 @@ export default function Login({ navigation }) {
       <TextInput
         style={styles.input}
         onChangeText={setNickname}
+        placeholder="NickName"
         value={nickname}
       />
       <TextInput
         style={styles.input}
+        secureTextEntry={true}
         onChangeText={setPassword}
+        placeholder="Password"
         value={password}
       />
-      <Button
-        style={styles.button}
-        onPress={ handleClick }
-        title="Login"
-        accessibilityLabel="Learn more about this purple button"
-      />
+      <Button onPress={handleClick} title="Login"/>
+
       <StatusBar style="auto" />
     </View>
   );
@@ -36,16 +37,14 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'green',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   input: {
     borderWidth: 2,
     borderColor: 'skyblue',
-    margin: 20,
-  },
-  button: {
-    color: 'skyblue',
+    backgroundColor: 'black',
+    color: 'white',
+    padding: 30,
+    margin: 40,
+    textAlign: 'center',
   },
 });
