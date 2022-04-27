@@ -1,16 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
+import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
-export default function Login() {
-  const [text, setText] = useState('Login');
+export default function Login({ navigation }) {
+  const [nickname, setNickname] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleClick = () => {
+    navigation.navigate('/game');
+  };
+
   return (
     <View style={styles.container}>
-      <Text>{ text }</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={setNickname}
+        value={nickname}
+      />
+      <TextInput
+        style={styles.input}
+        onChangeText={setPassword}
+        value={password}
+      />
       <Button
-        onPress={ () => setText('Mudar') }
-        title="Learn More"
-        color="#841584"
+        style={styles.button}
+        onPress={ handleClick }
+        title="Login"
         accessibilityLabel="Learn more about this purple button"
       />
       <StatusBar style="auto" />
@@ -24,5 +39,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'green',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  input: {
+    borderWidth: 2,
+    borderColor: 'skyblue',
+    margin: 20,
+  },
+  button: {
+    color: 'skyblue',
   },
 });
