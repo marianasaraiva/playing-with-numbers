@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, StyleSheet, TextInput, View, Button } from 'react-native';
-import ImageScreen from '../image/background.jpg';
+import { StyleSheet, TextInput, View, Pressable } from 'react-native';
+import Button from '../Components/button';
 
 
 export default function Login({ navigation }) {
@@ -14,33 +14,22 @@ export default function Login({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <ImageBackground
-        source={ImageScreen}
-        resizeMode="cover"
-        style={styles.image}
-      >
-        <TextInput
-          style={styles.input}
-          onChangeText={setNickname}
-          placeholder="NickName"
-          value={nickname}
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={setPassword}
-          placeholder="Password"
-          value={password}
-        />
-        <Button
-          style={styles.button}
-          color='skyblue'
-          onPress={handleClick}
-          title="Login"
-          accessibilityLabel="Learn more about this purple button"
-        />
-        <StatusBar style="auto" />
+      <TextInput
+        style={styles.input}
+        onChangeText={setNickname}
+        placeholder="NickName"
+        value={nickname}
+      />
+      <TextInput
+        style={styles.input}
+        secureTextEntry={true}
+        onChangeText={setPassword}
+        placeholder="Password"
+        value={password}
+      />
+      <Button onPress={handleClick} title="Login"/>
 
-      </ImageBackground>
+      <StatusBar style="auto" />
     </View>
   );
 }
@@ -48,10 +37,6 @@ export default function Login({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  image: {
-    flex: 1,
-    justifyContent: 'center',
   },
   input: {
     borderWidth: 2,
