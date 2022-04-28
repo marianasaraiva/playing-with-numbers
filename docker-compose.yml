@@ -29,22 +29,31 @@ services:
     working_dir: /usr/app
     volumes:
       - ./back-end:/usr/app
-    command: bash -c "npm install && npx sequelize db:create && npx sequelize db:migrate && npm start"
+    tty: true
+    stdin_open: true
+    command: bash
+    # command: bash -c "npm install && npx sequelize db:create && npx sequelize db:migrate && npm start"
 
   front-end:
-    image: node:latest
+    # image: node:latest
+    build: ./front-end
     container_name: container_front-end
     restart: always
-    depends_on:
-      - back-end
+    # depends_on:
+    #   - back-end
     env_file:
       - ./.env
     ports:
       - $CLIENT_PORT:$CLIENT_PORT
+      - "19002:19002"
+      - "19000:19000"
     environment:
-      - REACT_APP_BACK_PORT=$SERVER_PORT
-      - REACT_APP_BACK_HOST=$SERVER_HOST
+      - REACT_NATIVE_BACK_PORT=$SERVER_PORT
+      - REACT_NATIVE_BACK_HOST=$SERVER_HOST
     working_dir: /usr/app
     volumes:
       - ./front-end:/usr/app
-    command: bash -c "npm install && expo start"
+    # command: bash -c "npm start"
+    tty: true
+    stdin_open: true
+    command: bash
