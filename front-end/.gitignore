@@ -50,6 +50,9 @@ buck-out/
 /ios/Pods/
 
 # Expo
-.expo/
+/**/.expo/
 web-build/
 dist/
+
+# Dotenv
+.env
