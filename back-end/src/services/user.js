@@ -11,7 +11,7 @@ const getById = async (id) => {
   return user;
 };
 
-const create = async ({ nickname, password, avatar }) => {
+const create = async ({ nickname, password, avatarId }) => {
   const existingUser = await User.findOne({ where: { nickname } });
 
   if (existingUser) {
@@ -19,12 +19,12 @@ const create = async ({ nickname, password, avatar }) => {
     throw error;
   }
 
-  const user = await User.create({ nickname, password, avatar });
+  const user = await User.create({ nickname, password, avatarId });
 
   return user;
 };
 
-const update = async ({ id, nickname, password, avatar }) => {
+const update = async ({ id, nickname, password, avatarId }) => {
   const existingUser = await User.findOne({ where: { id } });
 
   if (!existingUser) {
@@ -32,7 +32,7 @@ const update = async ({ id, nickname, password, avatar }) => {
     throw error;
   }
 
-  const [row] = await User.update({ nickname, password, avatar }, { where: { id } });
+  const [row] = await User.update({ nickname, password, avatarId }, { where: { id } });
 
   return row;
 };
