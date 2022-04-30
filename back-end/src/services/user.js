@@ -29,9 +29,9 @@ const update = async ({ id, nickname, password, avatarId }) => {
 
   if (!existingUser) {
     const error = createError('User not found', 'notFound');
+
     throw error;
   }
-
   const [row] = await User.update({ nickname, password, avatarId }, { where: { id } });
 
   return row;
