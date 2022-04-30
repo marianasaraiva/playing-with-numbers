@@ -9,9 +9,8 @@ const userSchema = Joi.object({
     .string()
     .min(6)
     .required(),
-  avatar: Joi
-    .string()
-    .min(2)
+  avatarId: Joi
+    .number()
     .required(),
 });
 

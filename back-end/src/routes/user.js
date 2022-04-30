@@ -1,12 +1,13 @@
 const userRouter = require('express').Router();
 const UserController = require('../controllers/user');
+const { validateUser } = require('../middlewares/user');
 
 userRouter.route('/')
   .get(UserController.getAll)
-  .post(UserController.create);
+  .post(validateUser, UserController.create);
 
 userRouter.route('/:id')
   .get(UserController.getById)
-  .put(UserController.update);
+  .put(validateUser, UserController.update);
 
 module.exports = userRouter;

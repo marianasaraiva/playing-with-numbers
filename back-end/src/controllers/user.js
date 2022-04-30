@@ -23,8 +23,8 @@ const getById = async (req, res, next) => {
 
 const create = async (req, res, next) => {
   try {
-    const { nickname, password, avatar } = req.body;
-    const user = await UserService.create({ nickname, password, avatar });
+    const { nickname, password, avatarId } = req.body;
+    const user = await UserService.create({ nickname, password, avatarId });
 
     return res.status(201).json(user);
   } catch (error) {
@@ -35,8 +35,8 @@ const create = async (req, res, next) => {
 const update = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { nickname, password, avatar } = req.body;
-    const user = await UserService.update({ id, nickname, password, avatar });
+    const { nickname, password, avatarId } = req.body;
+    const user = await UserService.update({ id, nickname, password, avatarId });
 
     return res.status(201).json(user);
   } catch (error) {
