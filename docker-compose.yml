@@ -21,7 +21,7 @@ services:
     ports:
       - $SERVER_PORT:$SERVER_PORT
     environment:
-      - DB_HOST=$DB_HOST
+      - DB_HOST=mysql
       - DB_NAME=$DB_NAME
       - DB_USER=$DB_USER
       - DB_PASSWORD=$DB_PASSWORD
@@ -29,10 +29,10 @@ services:
     working_dir: /usr/app
     volumes:
       - ./back-end:/usr/app
-    command: bash -c "npm install && npx sequelize db:create && npx sequelize db:migrate && npm start"
+    command: bash -c "npm install && npx sequelize db:drop && npx sequelize db:create && npx sequelize db:migrate && npx sequelize db:seed:all && npm start"
 
   front-end:
-    image: node:latest
+    image: node:16.15.0
     container_name: container_front-end
     restart: always
     depends_on:
@@ -45,7 +45,7 @@ services:
       - "19002:19002"
     environment:
       - REACT_APP_BACK_PORT=$SERVER_PORT
-      - REACT_APP_BACK_HOST=$SERVER_HOST
+      - REACT_APP_BACK_HOST=back-end
     working_dir: /usr/app
     volumes:
       - ./front-end:/usr/app
