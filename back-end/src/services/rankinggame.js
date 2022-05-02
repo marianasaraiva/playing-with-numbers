@@ -1,7 +1,8 @@
 const { Game, User } = require('../models');
 
-const getAll = async () => {
+const getByGameId = async (id) => {
   const ranking = await Game.findAll({
+    where: { id },
     include:
       [
         { model: User,
@@ -15,5 +16,5 @@ const getAll = async () => {
 };
 
 module.exports = {
-  getAll,
+  getByGameId,
 };

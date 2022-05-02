@@ -1,8 +1,9 @@
 const RankingService = require('../services/rankinggame');
 
-const getAll = async (_req, res, next) => {
+const getByGameId = async (req, res, next) => {
   try {
-    const ranking = await RankingService.getAll();
+    const { id } = req.params; 
+    const ranking = await RankingService.getByGameId(id);
 
     return res.status(200).json(ranking);
   } catch (error) {
@@ -11,5 +12,5 @@ const getAll = async (_req, res, next) => {
 };
 
 module.exports = {
-  getAll,
+  getByGameId,
 };
