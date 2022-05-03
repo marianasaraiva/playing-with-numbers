@@ -29,19 +29,20 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   RankingGame.associate = (models) => {
-    models.User.belongsToMany(models.Game, {
-      as: 'games',
-      through: RankingGame,
-      foreignKey: 'userId',
-      otherKey: 'gameId',
-    });
+    RankingGame.belongsTo(models.User, { foreignKey: 'userId', as: 'users' });
+    // models.User.belongsToMany(models.Game, {
+    //   as: 'games',
+    //   through: RankingGame,
+    //   foreignKey: 'userId',
+    //   otherKey: 'gameId',
+    // });
 
-    models.Game.belongsToMany(models.User, {
-      as: 'users',
-      through: RankingGame,
-      foreignKey: 'gameId',
-      otherKey: 'userId',
-    });
+    // models.Game.belongsToMany(models.User, {
+    //   as: 'users',
+    //   through: RankingGame,
+    //   foreignKey: 'gameId',
+    //   otherKey: 'userId',
+    // });
   };
 
   return RankingGame;
