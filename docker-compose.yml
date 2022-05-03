@@ -49,4 +49,4 @@ services:
     working_dir: /usr/app
     volumes:
       - ./front-end:/usr/app
-    command: bash -c "npm install --global expo-cli && npm install && expo start --lan"
+    command: bash -c "npm install --global expo-cli && npm install && expo start --web --lan"
