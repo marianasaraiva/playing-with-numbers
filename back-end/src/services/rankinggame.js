@@ -1,4 +1,4 @@
-const { User, RankingGame } = require('../models');
+const { User, Avatar, RankingGame } = require('../models');
 
 const getByGameId = async (id) => {
   const ranking = await RankingGame.findAll({
@@ -6,8 +6,16 @@ const getByGameId = async (id) => {
     include: [
       {
         model: User,
-        as: 'users'
-      }
+        as: 'users',
+        attributes: { exclude: ['password', 'id'] },
+        include: [
+          {
+            model: Avatar,
+            as: 'avatar',
+            attributes: { exclude: ['name', 'id'] },
+          },
+        ],
+      },
     ],
     order: [['score', 'DESC']],
     limit: 10,
