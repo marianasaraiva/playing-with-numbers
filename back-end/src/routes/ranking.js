@@ -1,7 +1,7 @@
 const rankingRouter = require('express').Router();
 const RankingController = require('../controllers/rankinggame');
 
-rankingRouter.route('/:id')
+rankingRouter.route('/:gameId')
   .get(RankingController.getByGameId);
 
 

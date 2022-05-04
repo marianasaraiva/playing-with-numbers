@@ -1,8 +1,8 @@
 const { User, Avatar, RankingGame } = require('../models');
 
-const getByGameId = async (id) => {
+const getByGameId = async (gameId) => {
   const ranking = await RankingGame.findAll({
-    where: { gameId: id },
+    where: { gameId },
     include: [
       {
         model: User,
