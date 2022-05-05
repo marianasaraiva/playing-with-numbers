@@ -6,7 +6,12 @@ module.exports = (user) => {
     algorithm: 'HS256',
   };
 
-  const token = jwt.sign({ payload: user }, process.env.JWT_SECRET, jwtConfig);
+  const payload = {
+    image: user.avatar.url,
+    nickname: user.nickname,
+  };
+
+  const token = jwt.sign({ payload }, process.env.JWT_SECRET, jwtConfig);
 
   return token;
 };

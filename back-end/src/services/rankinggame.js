@@ -1,19 +1,36 @@
-const { Game, User } = require('../models');
+const { User, Avatar, RankingGame } = require('../models');
 
-const getAll = async () => {
-  const ranking = await Game.findAll({
-    include:
-      [
-        { model: User,
-          as: 'users',
-          through: { attributes: ['score'] },
-          attributes: { exclude: ['password', 'id'] },
-        },
-      ],
+const getByGameId = async (gameId) => {
+  const ranking = await RankingGame.findAll({
+    where: { gameId },
+    include: [
+      {
+        model: User,
+        as: 'users',
+        attributes: { exclude: ['password', 'id'] },
+        include: [
+          {
+            model: Avatar,
+            as: 'avatar',
+            attributes: { exclude: ['name', 'id'] },
+          },
+        ],
+      },
+    ],
+    order: [['score', 'DESC']],
+    limit: 10,
   });
+
+  return ranking;
+};
+
+const create = async ({ score, gameId, userId }) => {
+  const ranking = await RankingGame.create({ score, gameId, userId });
+
   return ranking;
 };
 
 module.exports = {
-  getAll,
+  getByGameId,
+  create,
 };
