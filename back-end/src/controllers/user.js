@@ -36,9 +36,9 @@ const update = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { nickname, password, avatarId } = req.body;
-    const user = await UserService.update({ id, nickname, password, avatarId });
+    await UserService.update({ id, nickname, password, avatarId });
 
-    return res.status(201).json(user);
+    return res.status(201).json({ message: 'User updated successfully'});
   } catch (error) {
     next(error);
   }
