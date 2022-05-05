@@ -24,6 +24,13 @@ const getByGameId = async (gameId) => {
   return ranking;
 };
 
+const create = async ({ score, gameId, userId }) => {
+  const ranking = await RankingGame.create({ score, gameId, userId });
+
+  return ranking;
+};
+
 module.exports = {
   getByGameId,
+  create,
 };

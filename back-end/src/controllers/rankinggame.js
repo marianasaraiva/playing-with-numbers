@@ -11,6 +11,18 @@ const getByGameId = async (req, res, next) => {
   }
 };
 
+const create = async (req, res, next) => {
+  try {
+    const { score, gameId, userId } = req.body; 
+    const ranking = await RankingService.create({ score, gameId, userId });
+
+    return res.status(201).json(ranking);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getByGameId,
+  create,
 };
