@@ -1,6 +1,6 @@
 const { userSchema } = require('../schemas/user');
 
-const validateUser = async (req, _res, next) => {
+const validateUser = (req, _res, next) => {
   const { nickname, password, avatarId } = req.body;
   const { error } = userSchema.validate({ nickname, password, avatarId });
 
