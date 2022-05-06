@@ -32,9 +32,8 @@ const update = async ({ id, nickname, password, avatarId }) => {
 
     throw error;
   }
-  const [row] = await User.update({ nickname, password, avatarId }, { where: { id } });
 
-  return row;
+  await User.update({ nickname, password, avatarId }, { where: { id } });
 };
 
 module.exports = {
