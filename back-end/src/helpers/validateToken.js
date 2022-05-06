@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-module.exports = async (token) => {
+module.exports = (token) => {
   try {
     const { payload } = jwt.verify(token, process.env.JWT_SECRET);
     
