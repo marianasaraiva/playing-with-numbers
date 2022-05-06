@@ -1,6 +1,7 @@
 const statusByErrorCode = {
   alreadyExists: 409,
   notFound: 404,
+  forbidden: 401,
 };
 
 module.exports = (err, _req, res, _next) => {
