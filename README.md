@@ -41,8 +41,16 @@ Tecnologias
     - jsonwebtoken
 
 ### O que foi desenvolvido
+API para gerenciar usuários e jogos de tabuada, armazenando e fornecendo as informações relacionadas à aplicação. 
+
+Foi desenvolvida a rota `/user` com intuito de cadastrar, editar, listar e permitir login de usuários no jogo. A rota `/login` tem a função de validar o acesso do usuário à plataforma. Além dessas, a rota `/avatar` consegue listar os avatares disponíveis para exibi-los no front-end e associar a imagem escolhida ao respectivo usuário, deixando a aplicação mais atrativa ao público alvo.
+
+Outra rota desenvolvida foi a `/ranking` responsável por listar as pontuações de forma ordenada e realizar a inserção da pontuação ao final de cada jogo. Por fim, a rota `/game` é responsável por listar todos os jogos da aplicação ou ainda selecionar um jogo específico.
 
 ### Documentação da API
+A ferramenta escolhida para documentar a API foi o Postman. Esta escolha se deu pela facilidade em compartilhar as informações dos endpoints em tempo real, uma vez que ao atualizar a aplicação localmente, os demais membros da equipe recebem essa atualização instantaneamente.
+
+Acesse a documentação [aqui](https://documenter.getpostman.com/view/20099081/UyxgK8Ei).
 
 ## Front-end
 ### Habilidades
