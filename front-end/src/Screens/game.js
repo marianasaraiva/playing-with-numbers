@@ -4,7 +4,7 @@ import Button from '../Components/button';
 import { View, Text, Picker } from 'react-native';
 import { fetchAPIGet } from '../services/fetchAPI';
 
-export default function Game() {
+export default function Game({ navigation }) {
   const { setGame } = useContext(Context);
   const [selectedGame, setSelectedGame] = useState('Sum');
   const [games, setGames] = useState([]);
@@ -18,7 +18,10 @@ export default function Game() {
     fetchAPIGame();
   }, [])
 
-  
+  const handlePlayClick = () => {
+    setGame(selectedGame);
+    navigation.navigate('Play');
+  }
 
   return (
     <View>
@@ -35,9 +38,8 @@ export default function Game() {
             : null
         }
       </Picker>
-      <Button onPress={ () => setGame(selectedGame) } title="Jogar"/>
-      {/* <Button onPress={} title="Ranking"/>
-      <Button onPress={} title="Level"/> */}
+      <Button onPress={ handlePlayClick } title="Jogar"/>
+      <Button onPress={ () => navigation.navigate('Ranking') } title="Ranking"/>
     </View>
   );
 }
