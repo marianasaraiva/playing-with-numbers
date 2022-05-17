@@ -1,18 +1,17 @@
 import React from 'react';
-import Provider from '../context/Provider';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Login from '../Screens/login';
 import Game from '../Screens/game';
 import Register from '../Screens/register';
 import Home from '../Screens/home';
 import Play from '../Screens/play';
+import Ranking from '../Screens/ranking';
 
 const Stack = createNativeStackNavigator();
 
 export default function Routes() {
   return (
     <Stack.Navigator initialRouteName="Home">
-      <Provider>
         <Stack.Screen
           name="Home"
           component={Home}
@@ -33,7 +32,10 @@ export default function Routes() {
           name="Play"
           component={Play}
         />
-      </Provider>
+        <Stack.Screen
+          name="Ranking"
+          component={Ranking}
+        />
   </Stack.Navigator>
   )
 }
