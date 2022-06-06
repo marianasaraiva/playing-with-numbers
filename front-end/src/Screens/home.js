@@ -25,9 +25,9 @@ export default function Home({ navigation }) {
         <Text style={styles.text}>
           Are not registered, click here!
         </Text>
-        <Button onPress={redirectLogin} title="Login" />
+        <Button onPress={redirectLogin} title="Login" disabled={false}/>
 
-        <Button onPress={redirectRegister} title="Register" />
+        <Button onPress={redirectRegister} title="Register" disabled={false}/>
 
         <StatusBar style="auto" />
 

@@ -33,7 +33,7 @@ export default function Register({ navigation }) {
           placeholder="Avatar"
           value={avatar}
         />
-        <Button onPress={handleClick} title="Register"/>
+        <Button onPress={handleClick} title="Register" disabled={false}/>
         <StatusBar style="auto" />
     </View>
   );

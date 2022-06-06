@@ -27,7 +27,7 @@ export default function Login({ navigation }) {
         placeholder="Password"
         value={password}
       />
-      <Button onPress={handleClick} title="Login"/>
+      <Button onPress={handleClick} title="Login" disabled={false} />
 
       <StatusBar style="auto" />
     </View>
