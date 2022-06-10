@@ -38,8 +38,8 @@ export default function Game({ navigation }) {
             : null
         }
       </Picker>
-      <Button onPress={ handlePlayClick } title="Jogar"/>
-      <Button onPress={ () => navigation.navigate('Ranking') } title="Ranking"/>
+      <Button onPress={ handlePlayClick } title="Jogar" disabled={false}/>
+      <Button onPress={ () => navigation.navigate('Ranking') } title="Ranking" disabled={false}/>
     </View>
   );
 }
