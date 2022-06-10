@@ -1,6 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import ImageScreen from '../image/background.jpg';
 import Button from '../Components/button';
 
@@ -22,12 +22,19 @@ export default function Home({ navigation }) {
         resizeMode="cover"
         style={styles.image}
       >
-        <Text style={styles.text}>
-          Are not registered, click here!
-        </Text>
-        <Button onPress={redirectLogin} title="Login" disabled={false}/>
+        <View style={styles.home}>
+          <Image
+          style={styles.logo}
+          source={require('../image/logo.png')}
+          />
+          <Button onPress={redirectLogin} title="Login" disabled={false}/>
 
-        <Button onPress={redirectRegister} title="Register" disabled={false}/>
+          <Button onPress={redirectRegister} title="Register" disabled={false}/>
+          <Text style={styles.text}>
+            Are not registered, click here!
+          </Text>
+
+        </View>
 
         <StatusBar style="auto" />
 
@@ -45,8 +52,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   text: {
-    backgroundColor: 'black',
-    color: 'white',
+    color: 'black',
     textAlign: 'center',
   },
+  logo: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 110,
+    marginVertical: 50,
+  }
 });
