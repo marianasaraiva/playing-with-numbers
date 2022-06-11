@@ -6,10 +6,10 @@
 
 Desenvolvimento de aplicação Full Stack, construindo uma API para gerenciar as infomações do jogo de matemática em formato de tabuada.
 
-## Gifs do projeto
-<h3 align="center">Exemplo</h3>
+## Imagem tela inicial do projeto
+<h3 align="center">Tela inicial</h3>
 <p align="center">
-  <img src="" alt="Playing with numbers Gif"/>
+  <img src="https://github.com/marianasaraiva/playing-with-numbers/blob/styles/front-end/src/image/InitialScreen.png" alt="Playing with numbers Gif"/>
 </p>
 
 ## Back-end
