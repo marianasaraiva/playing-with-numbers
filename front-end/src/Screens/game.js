@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Context from '../context/Context';
 import Button from '../Components/button';
-import { View, Text, Picker } from 'react-native';
+import { Image, ImageBackground, StyleSheet, View, Picker } from 'react-native';
+import ImageScreen from '../image/background.jpg';
 import { fetchAPIGet } from '../services/fetchAPI';
 
 export default function Game({ navigation }) {
@@ -24,22 +25,62 @@ export default function Game({ navigation }) {
   }
 
   return (
-    <View>
-      <Text>Game de Matemática</Text>
-      <Picker
-        selectedValue={selectedGame}
-        style={{ height: 50, width: 150 }}
-        onValueChange={(game) => setSelectedGame(game)}
+    <View style={styles.container}>
+      <ImageBackground
+        source={ImageScreen}
+        resizeMode="cover"
+        style={styles.image}
       >
-        {
-          games.length !== 0
-            ? games.map(({ name, id }) => (
-              <Picker.Item key={id} label={name} value={name} /> ))
-            : null
-        }
-      </Picker>
-      <Button onPress={ handlePlayClick } title="Jogar" disabled={false}/>
-      <Button onPress={ () => navigation.navigate('Ranking') } title="Ranking" disabled={false}/>
+        <Image
+          style={styles.logo}
+          source={require('../image/game.png')}
+        />
+        <Picker
+          selectedValue={selectedGame}
+          style={styles.select}
+          onValueChange={(game) => setSelectedGame(game)}
+        >
+          {
+            games.length !== 0
+              ? games.map(({ name, id }) => (
+                <Picker.Item key={id} label={name} value={name} /> ))
+              : null
+          }
+        </Picker>
+        <Button onPress={ handlePlayClick } title="Jogar" disabled={false}/>
+        <Button onPress={ () => navigation.navigate('Ranking') } title="Ranking" disabled={false}/>
+      </ImageBackground>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  image: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  logo: {
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginHorizontal: 110,
+    marginVertical: 50,
+  },
+  select: {
+    height: 50,
+    width: 200,
+    marginHorizontal: 100,
+    marginVertical: 50,
+    borderRadius: 4,
+    borderColor: 'skyblue',
+    textAlign: 'center',
+    fontSize: 18,
+  },
+});

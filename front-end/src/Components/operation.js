@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StyleSheet, View, TextInput, Text } from 'react-native';
 import { Table, Row, Rows } from 'react-native-table-component';
 import Button from './button';
+import Context from '../context/Context';
 
 const tableData = [];
 
 const tableHead = ['Número', 'Operação', 'Número', 'Igual a'];
 
 export default function OperationTable({ navigation }) {
+  const { game } = useContext(Context);
   const [data, setData] = useState({tableHead, tableData});
   const [response, setResponse] = useState([]);
   const [userResponse, setUserResponse] = useState(new Array(10).fill(''));
@@ -17,13 +19,33 @@ export default function OperationTable({ navigation }) {
   const getRandomNumber = () => { 
     return Math.floor(Math.random() * (10 - 1)) + 1;
   }
+
+  const getResult = (num, index, operation) => {
+    switch (operation) {
+      case '+':
+        return num + index;    
+      case '-':
+        return num - index;    
+      case '/':
+        return num / index;    
+      default:
+        return num * index;    
+    }
+  }
   
   const calculate = (num) => {
     const result = [];
+    const operations = {
+      Sum: '+',
+      Substraction: '-',
+      Division: '/',
+      Multiplication: '*',
+    };
+
     for (let x = 1; x <= 10; x += 1) {
-      tableData.push([`${num}`, '*', `${x}`, '=']);
+      tableData.push([`${x}`,`${operations[game]}`, `${num}`, '=']);
       setData({...data, tableData });
-      result.push(num * x);
+      result.push(getResult(num, x, operations[game]));
       setResponse(result);
     };
   };
