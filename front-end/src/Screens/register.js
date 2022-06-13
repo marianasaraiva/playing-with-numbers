@@ -1,15 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Image, ImageBackground, StyleSheet, TextInput, View } from 'react-native';
+import { Image, ImageBackground, StyleSheet, TextInput, View, Picker } from 'react-native';
 import ImageScreen from '../image/background.jpg';
 import Button from '../Components/button';
+import { fetchAPIPost, fetchAPIGet } from '../services/fetchAPI';
 
 export default function Register({ navigation }) {
   const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
-  const [avatar, setAvatar] = useState('');
+  const [selectedAvatar, setSelectedAvatar] = useState('Coelhinha');
+  const [avatars, setAvatars] = useState([]);
 
-  const handleClick = () => {
+  useEffect(async () => {
+    const recievedAvatars = await fetchAPIGet('get', 'http://localhost:3001/avatar');
+    setAvatars(recievedAvatars);
+  }, []);
+
+  const handleClick = async () => {
+    const data = {
+      nickname,
+      password,
+      avatarId: avatars.find((avatar) => avatar.name === selectedAvatar).id,
+    };
+
+    await fetchAPIPost('post', 'http://localhost:3001/user', data);
     navigation.navigate('Login');
   };
 
@@ -38,12 +52,18 @@ export default function Register({ navigation }) {
           placeholder="Password"
           value={password}
         />
-        <TextInput
-          style={styles.input}
-          onChangeText={setAvatar}
-          placeholder="Avatar"
-          value={avatar}
-        />
+        <Picker
+          selectedValue={selectedAvatar}
+          style={styles.select}
+          onValueChange={(avatar) => setSelectedAvatar(avatar)}
+        >
+          {
+            avatars.length !== 0
+              ? avatars.map(({ name, id }) => (
+                <Picker.Item key={id} label={name} value={name} /> ))
+              : null
+          }
+        </Picker>
         <Button onPress={handleClick} title="Register" disabled={false}/>
         <StatusBar style="auto" />
       </ImageBackground>
@@ -81,5 +101,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: 110,
     marginVertical: 50,
-  }
+  },
+  select: {
+    height: 50,
+    paddingHorizontal: 32,
+    marginHorizontal: 70,
+    marginBottom: 36,
+    borderRadius: 4,
+    borderColor: 'skyblue',
+    textAlign: 'center',
+    fontSize: 18,
+  },
 });
