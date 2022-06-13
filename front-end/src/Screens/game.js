@@ -4,6 +4,7 @@ import Button from '../Components/button';
 import { Image, ImageBackground, StyleSheet, View, Picker } from 'react-native';
 import ImageScreen from '../image/background.jpg';
 import { fetchAPIGet } from '../services/fetchAPI';
+import Header from '../Components/header';
 
 export default function Game({ navigation }) {
   const { setGame } = useContext(Context);
@@ -31,6 +32,7 @@ export default function Game({ navigation }) {
         resizeMode="cover"
         style={styles.image}
       >
+        <Header />
         <Image
           style={styles.logo}
           source={require('../image/game.png')}
@@ -75,9 +77,9 @@ const styles = StyleSheet.create({
   },
   select: {
     height: 50,
-    width: 200,
-    marginHorizontal: 100,
-    marginVertical: 50,
+    paddingHorizontal: 32,
+    marginHorizontal: 70,
+    marginBottom: 36,
     borderRadius: 4,
     borderColor: 'skyblue',
     textAlign: 'center',

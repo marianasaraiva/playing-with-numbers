@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Image, ImageBackground, StyleSheet, TextInput, View } from 'react-native';
 import ImageScreen from '../image/background.jpg';
 import Button from '../Components/button';
-
+import { fetchAPIPost } from '../services/fetchAPI';
+import Context from '../context/Context';
 
 export default function Login({ navigation }) {
+  const { setUser, setToken } = useContext(Context);
   const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleClick = () => {
+  const handleClick = async () => {
+    const data = {
+      nickname,
+      password,
+    };
+
+    const loggedUSer = await fetchAPIPost('post', 'http://localhost:3001/login', data);
+    setToken(loggedUSer.token);
+    setUser(loggedUSer.user);
     navigation.navigate('Game');
   };
 
