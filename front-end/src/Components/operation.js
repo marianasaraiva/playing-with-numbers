@@ -99,7 +99,14 @@ export default function OperationTable({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 2, padding: 70, paddingTop: 30 },
+  container: {
+    flex: 2,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    width: '70%',
+  },
   table: {
     backgroundColor: 'rgba(252, 252, 252, 0.4)',
     flexDirection: 'row',
@@ -108,19 +115,19 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   text: {
-    width: 100,
+    width: '100%',
     fontSize: 20,
     textAlign: 'center'
   },
   input: {
-    width: 100,
+    width: '100%',
     fontSize: 20,
     textAlign: 'center',
     backgroundColor: 'white',
     borderRadius: 4
   },
   view: {
-    paddingBottom: 40,
+    // paddingBottom: 40,
     textAlign: 'center',
     fontSize: 35,
     fontWeight: 'bold'

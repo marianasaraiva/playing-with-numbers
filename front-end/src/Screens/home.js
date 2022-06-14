@@ -22,19 +22,16 @@ export default function Home({ navigation }) {
         resizeMode="cover"
         style={styles.image}
       >
-        <View style={styles.home}>
-          <Image
-          style={styles.logo}
-          source={require('../image/logo.png')}
-          />
-          <Button onPress={redirectLogin} title="Login" disabled={false}/>
+        <Image
+        style={styles.logo}
+        source={require('../image/logo.png')}
+        />
+        <Button onPress={redirectLogin} title="Login" disabled={false}/>
 
-          <Button onPress={redirectRegister} title="Register" disabled={false}/>
-          <Text style={styles.text}>
-            Are not registered, click here!
-          </Text>
-
-        </View>
+        <Button onPress={redirectRegister} title="Register" disabled={false}/>
+        <Text style={styles.text}>
+          Are not registered, click here!
+        </Text>
 
         <StatusBar style="auto" />
 
@@ -49,7 +46,11 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    justifyContent: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    paddingTop: '10vh',
   },
   text: {
     color: 'black',
@@ -61,7 +62,5 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: 110,
-    marginVertical: 50,
   }
 });

@@ -29,7 +29,11 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    justifyContent: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    paddingTop: '10vh',
   },
   logo: {
     width: 200,
@@ -37,7 +41,5 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: 110,
-    marginVertical: 50,
-  }
+  },
 });

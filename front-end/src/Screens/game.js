@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Context from '../context/Context';
 import Button from '../Components/button';
-import { Image, ImageBackground, StyleSheet, View, Picker } from 'react-native';
+import { Image, ImageBackground, StyleSheet, View, Picker, Text } from 'react-native';
 import ImageScreen from '../image/background.jpg';
 import { fetchAPIGet } from '../services/fetchAPI';
 import Header from '../Components/header';
@@ -10,10 +10,16 @@ export default function Game({ navigation }) {
   const { setGame } = useContext(Context);
   const [selectedGame, setSelectedGame] = useState('Sum');
   const [games, setGames] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const fetchAPIGame = async () => {
-    const result = await fetchAPIGet('get', 'http://localhost:3001/game');
-    setGames(result);
+    const { data, error } = await fetchAPIGet('get', 'http://nucbox:3001/game');
+
+    if (error) {
+      setErrorMessage(error);
+    } else {
+      setGames(data);
+    }
   }
 
   useEffect(() => {
@@ -49,6 +55,9 @@ export default function Game({ navigation }) {
               : null
           }
         </Picker>
+        {
+          errorMessage !== '' && <Text style={styles.error}>{errorMessage}</Text>
+        }
         <Button onPress={ handlePlayClick } title="Jogar" disabled={false}/>
         <Button onPress={ () => navigation.navigate('Ranking') } title="Ranking" disabled={false}/>
       </ImageBackground>
@@ -59,12 +68,26 @@ export default function Game({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   image: {
     flex: 1,
-    justifyContent: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    paddingTop: '10vh',
+  },
+  input: {
+    borderWidth: 2,
+    borderColor: 'skyblue',
+    backgroundColor: 'white',
+    borderRadius: 4,
+    color: 'black',
+    paddingVertical: 12,
+    width: '70%',
+    textAlign: 'center',
+    fontSize: 16,
+    lineHeight: 21,
   },
   logo: {
     width: 200,
@@ -72,17 +95,22 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: 110,
-    marginVertical: 50,
   },
   select: {
     height: 50,
-    paddingHorizontal: 32,
-    marginHorizontal: 70,
-    marginBottom: 36,
+    width: '70%',
     borderRadius: 4,
     borderColor: 'skyblue',
     textAlign: 'center',
     fontSize: 18,
+  },
+  error: {
+    backgroundColor: 'rgba(252, 252, 252, 0.4)',
+    borderRadius: 4,
+    color: 'red',
+    textAlign: 'center',
+    width: '70%',
+    fontSize: 16,
+    padding: '2vh',
   },
 });
