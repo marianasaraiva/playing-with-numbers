@@ -6,27 +6,37 @@ export default function Header() {
   const { user } = useContext(Context);
 
   return (
-    <View>
-      <Text>{`Olá ${user.nickname}! Vamos brincar?`}</Text>
+    <View style={styles.container}>
       <Image
         style={styles.image}
         source={{
           uri: user.avatar.url,
         }}
         />
+        <Text style={styles.text}>{`Olá ${user.nickname}! Vamos brincar?`}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    height: 80,
+    position: 'absolute',
+    top: 0,
+    zIndex: 1,
   },
   image: {
-    flex: 1,
     justifyContent: 'center',
-    width: 100,
-    height: 100,
+    width: 80,
+    height: 80,
     borderRadius: 100,
+  },
+  text: {
+    fontSize: 20,
   },
 });
