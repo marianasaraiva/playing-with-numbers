@@ -70,14 +70,15 @@ export default function OperationTable({ navigation }) {
       {
         showResult 
         ?
-          <Text>{ finishMessage }</Text>
+          <Text style={styles.view}>{ finishMessage }</Text>
         :
-          <View>
+          <View style={styles.view}>
             { 
               response.length === 10 && data.map((row, index) => (
-                <View key={ index }>
+                <View style={styles.table} key={ index }>
                   <Text style={styles.text}>{ row }</Text>
                   <TextInput
+                    style={styles.input}
                     onChangeText={ (target) => handleOnChange(target, index) }
                     placeholder="?"
                     value={ userResponse[index] }
@@ -98,6 +99,30 @@ export default function OperationTable({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, paddingTop: 30 },
-  text: { margin: 6 }
+  container: { flex: 2, padding: 70, paddingTop: 30 },
+  table: {
+    backgroundColor: 'rgba(252, 252, 252, 0.4)',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 5,
+  },
+  text: {
+    width: 100,
+    fontSize: 20,
+    textAlign: 'center'
+  },
+  input: {
+    width: 100,
+    fontSize: 20,
+    textAlign: 'center',
+    backgroundColor: 'white',
+    borderRadius: 4
+  },
+  view: {
+    paddingBottom: 40,
+    textAlign: 'center',
+    fontSize: 35,
+    fontWeight: 'bold'
+  },
 });
