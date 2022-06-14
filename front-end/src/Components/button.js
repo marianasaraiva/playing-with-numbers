@@ -12,12 +12,10 @@ export default function Button(props) {
 
 const styles = StyleSheet.create({
   button: {
+    width: '70%',
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 12,
-    paddingHorizontal: 32,
-    marginBottom: 36,
-    marginHorizontal: 70,
     borderColor: 'skyblue',
     borderRadius: 4,
     elevation: 3,

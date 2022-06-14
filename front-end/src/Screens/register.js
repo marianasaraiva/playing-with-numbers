@@ -38,7 +38,7 @@ export default function Register({ navigation }) {
     if (error) {
       setErrorMessage(error);
     } else {
-    navigation.navigate('Login');
+      navigation.navigate('Login');
     }
   };
 
@@ -54,7 +54,7 @@ export default function Register({ navigation }) {
           source={require('../image/register.png')}
         />
 
-      <TextInput
+        <TextInput
           style={styles.input}
           onChangeText={setNickname}
           placeholder="NickName"
@@ -95,7 +95,11 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    justifyContent: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    paddingTop: '10vh',
   },
   input: {
     borderWidth: 2,
@@ -103,10 +107,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 4,
     color: 'black',
-    marginBottom: 36,
     paddingVertical: 12,
-    paddingHorizontal: 32,
-    marginHorizontal: 70,
+    width: '70%',
     textAlign: 'center',
     fontSize: 16,
     lineHeight: 21,
@@ -117,17 +119,22 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: 110,
-    marginVertical: 50,
   },
   select: {
     height: 50,
-    paddingHorizontal: 32,
-    marginHorizontal: 70,
-    marginBottom: 36,
+    width: '70%',
     borderRadius: 4,
     borderColor: 'skyblue',
     textAlign: 'center',
     fontSize: 18,
+  },
+  error: {
+    backgroundColor: 'rgba(252, 252, 252, 0.4)',
+    borderRadius: 4,
+    color: 'red',
+    textAlign: 'center',
+    width: '70%',
+    fontSize: 16,
+    padding: '2vh',
   },
 });

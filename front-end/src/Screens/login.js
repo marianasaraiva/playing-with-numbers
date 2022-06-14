@@ -26,7 +26,7 @@ export default function Login({ navigation }) {
       console.log('login', data);
       setToken(data.token);
       setUser(data.user);
-    navigation.navigate('Game');
+      navigation.navigate('Game');
     }
   };
 
@@ -71,7 +71,11 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    justifyContent: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+    paddingTop: '10vh',
   },
   input: {
     borderWidth: 2,
@@ -79,10 +83,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 4,
     color: 'black',
-    marginBottom: 36,
     paddingVertical: 12,
-    paddingHorizontal: 32,
-    marginHorizontal: 70,
+    width: '70%',
     textAlign: 'center',
     fontSize: 16,
     lineHeight: 21,
@@ -93,7 +95,14 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: 110,
-    marginVertical: 50,
-  }
+  },
+  error: {
+    backgroundColor: 'rgba(252, 252, 252, 0.4)',
+    borderRadius: 4,
+    color: 'red',
+    textAlign: 'center',
+    width: '70%',
+    fontSize: 16,
+    padding: '2vh',
+  },
 });
