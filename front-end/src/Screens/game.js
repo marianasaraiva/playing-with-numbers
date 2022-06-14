@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Context from '../context/Context';
 import Button from '../Components/button';
-import { Image, ImageBackground, StyleSheet, View, Picker } from 'react-native';
+import { Image, ImageBackground, StyleSheet, View, Picker, Text } from 'react-native';
 import ImageScreen from '../image/background.jpg';
 import { fetchAPIGet } from '../services/fetchAPI';
 import Header from '../Components/header';
@@ -10,10 +10,16 @@ export default function Game({ navigation }) {
   const { setGame } = useContext(Context);
   const [selectedGame, setSelectedGame] = useState('Sum');
   const [games, setGames] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const fetchAPIGame = async () => {
-    const result = await fetchAPIGet('get', 'http://localhost:3001/game');
-    setGames(result);
+    const { data, error } = await fetchAPIGet('get', 'http://nucbox:3001/game');
+
+    if (error) {
+      setErrorMessage(error);
+    } else {
+      setGames(data);
+    }
   }
 
   useEffect(() => {
@@ -49,6 +55,9 @@ export default function Game({ navigation }) {
               : null
           }
         </Picker>
+        {
+          errorMessage !== '' && <Text style={styles.error}>{errorMessage}</Text>
+        }
         <Button onPress={ handlePlayClick } title="Jogar" disabled={false}/>
         <Button onPress={ () => navigation.navigate('Ranking') } title="Ranking" disabled={false}/>
       </ImageBackground>

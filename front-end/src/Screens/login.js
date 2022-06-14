@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Image, ImageBackground, StyleSheet, TextInput, View } from 'react-native';
+import { Image, ImageBackground, StyleSheet, TextInput, View, Text } from 'react-native';
 import ImageScreen from '../image/background.jpg';
 import Button from '../Components/button';
 import { fetchAPIPost } from '../services/fetchAPI';
@@ -10,17 +10,24 @@ export default function Login({ navigation }) {
   const { setUser, setToken } = useContext(Context);
   const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleClick = async () => {
-    const data = {
+    const userData = {
       nickname,
       password,
     };
 
-    const loggedUSer = await fetchAPIPost('post', 'http://localhost:3001/login', data);
-    setToken(loggedUSer.token);
-    setUser(loggedUSer.user);
+    const { data, error } = await fetchAPIPost('post', 'http://nucbox:3001/login', userData);
+
+    if (error) {
+      setErrorMessage(error);
+    } else {
+      console.log('login', data);
+      setToken(data.token);
+      setUser(data.user);
     navigation.navigate('Game');
+    }
   };
 
   return (
@@ -47,6 +54,9 @@ export default function Login({ navigation }) {
           placeholder="Password"
           value={password}
         />
+        {
+          errorMessage !== '' && <Text style={styles.error}>{errorMessage}</Text>
+        }
         <Button onPress={handleClick} title="Login" disabled={false} />
 
         <StatusBar style="auto" />

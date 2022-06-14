@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { Image, ImageBackground, StyleSheet, TextInput, View, Picker } from 'react-native';
+import { Image, ImageBackground, StyleSheet, TextInput, View, Picker, Text } from 'react-native';
 import ImageScreen from '../image/background.jpg';
 import Button from '../Components/button';
 import { fetchAPIPost, fetchAPIGet } from '../services/fetchAPI';
@@ -10,21 +10,36 @@ export default function Register({ navigation }) {
   const [password, setPassword] = useState('');
   const [selectedAvatar, setSelectedAvatar] = useState('Coelhinha');
   const [avatars, setAvatars] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(async () => {
-    const recievedAvatars = await fetchAPIGet('get', 'http://localhost:3001/avatar');
-    setAvatars(recievedAvatars);
+    const { data, error } = await fetchAPIGet('get', 'http://nucbox:3001/avatar');
+
+    if (error) {
+      setErrorMessage(error);
+    } else {
+      setAvatars(data);
+    }
   }, []);
 
+  useEffect(() => {
+    setErrorMessage('');
+  }, [nickname, password]);
+
   const handleClick = async () => {
-    const data = {
+    const userData = {
       nickname,
       password,
       avatarId: avatars.find((avatar) => avatar.name === selectedAvatar).id,
     };
 
-    await fetchAPIPost('post', 'http://localhost:3001/user', data);
+    const { error } = await fetchAPIPost('post', 'http://nucbox:3001/user', userData);
+
+    if (error) {
+      setErrorMessage(error);
+    } else {
     navigation.navigate('Login');
+    }
   };
 
   return (
@@ -64,7 +79,10 @@ export default function Register({ navigation }) {
               : null
           }
         </Picker>
-        <Button onPress={handleClick} title="Register" disabled={false}/>
+        {
+          errorMessage !== '' && <Text style={styles.error}>{errorMessage}</Text>
+        }
+        <Button onPress={handleClick} title="Register" disabled={ errorMessage !== '' }/>
         <StatusBar style="auto" />
       </ImageBackground>
     </View>
